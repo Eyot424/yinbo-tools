@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>交易习惯图鉴 · 隐波小玩法</title>
+<meta name="description" content="12 道二选一情境题，看看你是八种交易习惯里的哪一种。娱乐，不是任何预测。">
+<meta property="og:title" content="交易习惯图鉴">
+<meta property="og:description" content="12 道二选一情境题，看看你是八种交易习惯里的哪一种。娱乐，不是任何预测。">
+<meta property="og:image" content="https://eyot424.github.io/yinbo-tools/play/assets/card-back.png">
+<meta name="theme-color" content="#FFF6DC">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a href="../">← 隐波小玩法</a><span class="muted">交易习惯图鉴</span></div>
+  <noscript><p class="noscript">这个小测试需要开启 JavaScript 才能玩。</p></noscript>
+  <p id="load-error" class="notice warn" hidden>题库没能加载，请刷新页面再试。</p>
+
+  <section id="intro" hidden>
+    <p class="eyebrow">八种韭菜，每种都有一集回测打脸</p>
+    <h1><span class="accent">交易习惯图鉴</span></h1>
+    <p class="sub">12 道二选一，约 2 分钟。凭第一反应选，没有对错，只有真相。</p>
+    <div class="panel">
+      <p style="margin:0">你的答案只留在这个页面里，不上传、不统计、不需要登录。测完会给你一个昵称、四枚字符芯片，和一集与你的习惯对口的回测。</p>
+    </div>
+    <button type="button" class="btn btn-block" id="start">开始测，看看我是哪种韭菜</button>
+  </section>
+
+  <section id="quiz" hidden>
+    <div class="qmeta"><span id="qno">第 1 / 12 题</span><button type="button" class="btn btn-ghost" id="prev" style="min-height:44px;padding:6px 14px">上一题</button></div>
+    <div class="progress" aria-hidden="true"><i id="pbar"></i></div>
+    <p class="qtext" id="qtext"></p>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <section id="result" hidden>
+    <p class="eyebrow">你的交易习惯是……</p>
+    <h1 class="result-name"><span class="accent" id="r-name"></span><span class="result-suffix" id="r-suffix"></span></h1>
+    <div class="chips" id="r-chips"></div>
+    <div class="art art-wide"><img id="r-art" alt="" width="640" height="480"></div>
+    <p class="tagline" id="r-tag"></p>
+    <p class="mod-line" id="r-mod"></p>
+
+    <div class="panel">
+      <h3>你大概率会……</h3>
+      <ul class="habits" id="r-habits"></ul>
+    </div>
+
+    <div class="panel">
+      <h3>四个维度的倾向</h3>
+      <div class="bars" id="r-bars"></div>
+    </div>
+
+    <div class="panel">
+      <h3>回测打脸现场：这一集专治你</h3>
+      <div class="ep" id="r-ep"></div>
+      <h3 style="margin-top:14px" id="r-ep2-h"></h3>
+      <div class="ep" id="r-ep2"></div>
+      <p class="muted" style="margin-bottom:0">“对口”是说话题相近，不是说这一集证明了什么。</p>
+    </div>
+
+    <div class="btn-row">
+      <button type="button" class="btn" id="save">保存去炫耀 / 去自黑</button>
+      <button type="button" class="btn btn-ghost" id="again">不服，再测一次</button>
+    </div>
+    <div id="share" hidden></div>
+  </section>
+
+  <section class="follow">
+    <h3>想看这些习惯背后的回测</h3>
+    <div class="follow-row">
+      <p>X：<a href="https://x.com/yinbonotes" target="_blank" rel="noopener">关注 @yinbonotes</a></p>
+    </div>
+    <div class="follow-row">
+      <p>YouTube：<br><a href="https://www.youtube.com/@yinbonotes"><b>@yinbonotes</b></a></p>
+    </div>
+    <p class="disclaimer">娱乐，不是任何预测；回测不代表未来；插画由 AI 生成。不是心理测量，不构成投资建议。</p>
+  </section>
+</div>
+
+<script src="../assets/app.js"></script>
+<script>
+(function () {
+  'use strict';
+  var P = window.Play;
+  var $ = function (id) { return document.getElementById(id); };
+  var data, answers = [], idx = 0, outcome = null;
+
+  function show(which) {
+    ['intro', 'quiz', 'result'].forEach(function (s) { $(s).hidden = (s !== which); });
+    window.scrollTo(0, 0);
+  }
+
+  function renderQuestion() {
+    var q = data.questions[idx], n = data.questions.length;
+    $('qno').textContent = '第 ' + (idx + 1) + ' / ' + n + ' 题';
+    $('pbar').style.width = (idx / n * 100) + '%';
+    $('qtext').textContent = q.text;
+    $('prev').style.visibility = idx === 0 ? 'hidden' : 'visible';
+    var box = $('opts');
+    box.innerHTML = '';
+    ['a', 'b'].forEach(function (k) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt' + (answers[idx] === k ? ' on' : '');
+      var tag = document.createElement('b');
+      tag.textContent = k.toUpperCase();
+      var span = document.createElement('span');
+      span.textContent = q[k];
+      b.appendChild(tag);
+      b.appendChild(span);
+      b.onclick = function () { choose(k, b); };
+      box.appendChild(b);
+    });
+  }
+
+  function choose(k, btn) {
+    answers[idx] = k;
+    btn.classList.add('on');
+    var n = data.questions.length;
+    setTimeout(function () {
+      if (idx < n - 1) { idx++; renderQuestion(); } else { finish(); }
+    }, 180);
+  }
+
+  function dimById(id) {
+    return data.dimensions.filter(function (d) { return d.id === id; })[0];
+  }
+
+  function compute() {
+    var counts = {};
+    data.dimensions.forEach(function (d) { counts[d.id] = 0; });
+    data.questions.forEach(function (q, i) { if (answers[i] === 'a') { counts[q.dim]++; } });
+    var side = function (id) { return counts[id] >= 2 ? 'a' : 'b'; };
+    var code = dimById('d1')[side('d1')].key + dimById('d2')[side('d2')].key + '-' + dimById('d3')[side('d3')].key;
+    var mod = side('d4') === 'a' ? 'watch' : 'zen';
+    return { counts: counts, code: code, mod: mod, side: side };
+  }
+
+  function strength(a) { return (a === 3 || a === 0) ? '明显' : '略偏'; }
+
+  function epHtml(box, ep, extra) {
+    box.innerHTML = '';
+    var no = document.createElement('div');
+    no.className = 'ep-no no';
+    no.textContent = '第 ' + ep.no + ' 集';
+    var t = document.createElement('div');
+    t.className = 't';
+    t.textContent = ep.title;
+    box.appendChild(no);
+    box.appendChild(t);
+    var meta = document.createElement('div');
+    meta.className = 'meta';
+    if (extra) { meta.appendChild(document.createTextNode(extra + ' ')); }
+    if (ep.url) {
+      var a = document.createElement('a');
+      a.href = ep.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = '在 X 上看这一集 →';
+      meta.appendChild(a);
+    } else {
+      var s = document.createElement('span');
+      s.className = 'tag';
+      s.textContent = '即将发布';
+      meta.appendChild(s);
+    }
+    box.appendChild(meta);
+  }
+
+  function finish() {
+    $('pbar').style.width = '100%';
+    var r = compute();
+    var type = data.types[r.code], mod = data.modifiers[r.mod];
+    outcome = { r: r, type: type, mod: mod };
+
+    $('r-name').textContent = type.nickname;
+    $('r-suffix').textContent = mod.suffix.replace('·', '');
+    var chips = $('r-chips');
+    chips.innerHTML = '';
+    outcome.chipList = [];
+    data.dimensions.forEach(function (d) {
+      var a = r.counts[d.id];
+      var end = a >= 2 ? d.a : d.b;
+      var label = end.label + ' · ' + strength(a);
+      outcome.chipList.push(label);
+      var c = document.createElement('span');
+      c.className = 'chip';
+      c.textContent = end.label + ' ';
+      var s = document.createElement('small');
+      s.textContent = strength(a);
+      c.appendChild(s);
+      chips.appendChild(c);
+    });
+    var img = $('r-art');
+    img.classList.remove('img-failed');
+    img.src = '../assets/types/' + type.code + '.png';
+    $('r-tag').textContent = type.tagline;
+    $('r-mod').textContent = mod.name + '：' + mod.tagline;
+
+    var ul = $('r-habits');
+    ul.innerHTML = '';
+    type.habits.forEach(function (h) {
+      var li = document.createElement('li');
+      li.textContent = h;
+      ul.appendChild(li);
+    });
+
+    var bars = $('r-bars');
+    bars.innerHTML = '';
+    var pos = { 3: 10, 2: 33, 1: 67, 0: 90 };
+    data.dimensions.forEach(function (d) {
+      var a = r.counts[d.id];
+      var row = document.createElement('div');
+      row.className = 'bar-row';
+      row.innerHTML = '<div class="ends"><span><b></b> <span class="muted"></span></span><span><span class="muted"></span> <b></b></span></div>' +
+        '<div class="bar"><i></i></div><div class="how"></div>';
+      var bs = row.getElementsByTagName('b'), ms = row.querySelectorAll('.muted');
+      bs[0].textContent = d.a.label; ms[0].textContent = d.a.gloss;
+      ms[1].textContent = d.b.gloss; bs[1].textContent = d.b.label;
+      row.querySelector('.bar i').style.left = pos[a] + '%';
+      row.querySelector('.how').textContent = d.name + '：' + (a >= 2 ? d.a.label : d.b.label) + ' ' + strength(a) +
+        '（' + Math.max(a, 3 - a) + ' : ' + Math.min(a, 3 - a) + '）';
+      bars.appendChild(row);
+    });
+
+    var fitText = type.episode.fit ? '对口度：' + type.episode.fit + (type.episode.scope ? '（' + type.episode.scope + '）' : '') + '。' : '';
+    epHtml($('r-ep'), type.episode, fitText);
+    $('r-ep2-h').textContent = mod.name + '，还有一集也对口';
+    epHtml($('r-ep2'), mod.second, '');
+
+    $('share').hidden = true;
+    $('share').innerHTML = '';
+    show('result');
+  }
+
+  /* ---------- 分享卡 ---------- */
+
+  function renderCard(kind) {
+    var o = outcome, t = o.type, m = o.mod, C = P.C;
+    var CHIPCOL = [C.mint, C.cyan, C.yellow, '#FFA39B'];
+    return P.loadImage('../assets/types/' + t.code + '.png').then(function (img) {
+      var W = 1080, H = kind === '34' ? 1440 : 1080;
+      var canvas = document.createElement('canvas');
+      canvas.width = W; canvas.height = H;
+      var ctx = canvas.getContext('2d');
+      P.drawBackdrop(ctx, W, H);
+      P.drawFit(ctx, '交易习惯图鉴', 80, 100, 600, 40, 28, 900, C.ink, 'left');
+      var nick = t.nickname;
+      if (kind === '34') {
+        P.drawArt(ctx, img, 80, 140, 920, 620, 36);
+        P.drawFit(ctx, nick, 80, 870, 920, 88, 48, 800, C.ink, 'left');
+        P.drawFit(ctx, m.suffix.replace('·', '') , 80, 925, 920, 40, 28, 900, C.redText, 'left');
+        var cw = 210, gap = 20;
+        o.chipList.forEach(function (label, i) {
+          P.drawChip(ctx, label, 80 + i * (cw + gap), 960, cw, 76, CHIPCOL[i]);
+        });
+        P.drawParagraph(ctx, t.tagline, 80, 1110, 920, 52, 2, { size: 40, weight: 600 });
+        P.drawSticker(ctx, 80, 1165, 912, 104, 24, '#FFF1A8');
+        P.drawFit(ctx, '回测打脸现场：这一集专治你', 108, 1209, 860, 28, 22, 800, C.redText, 'left');
+        P.drawParagraph(ctx, '第 ' + t.episode.no + ' 集 ' + t.episode.title, 108, 1255, 860, 40, 1, { size: 32, weight: 800 });
+      } else {
+        P.drawArt(ctx, img, 60, 130, 440, 440, 32);
+        P.drawFit(ctx, nick, 540, 215, 480, 64, 40, 900, C.ink, 'left');
+        P.drawFit(ctx, m.suffix.replace('·', ''), 540, 268, 480, 36, 26, 900, C.redText, 'left');
+        var cw2 = 230;
+        o.chipList.forEach(function (label, i) {
+          P.drawChip(ctx, label, 540 + (i % 2) * (cw2 + 20), 300 + Math.floor(i / 2) * 96, cw2, 76, CHIPCOL[i]);
+        });
+        var y = P.drawParagraph(ctx, t.tagline, 60, 650, 960, 54, 2, { size: 42, weight: 600 }) + 24;
+        t.habits.forEach(function (h) {
+          y = P.drawParagraph(ctx, h, 60, y, 960, 44, 2, { size: 32, color: C.ink }) + 14;
+        });
+      }
+      P.drawFooter(ctx, W, H);
+      return canvas;
+    });
+  }
+
+  function init() {
+    $('intro').hidden = false;
+    $('start').onclick = function () {
+      answers = []; idx = 0;
+      renderQuestion();
+      show('quiz');
+    };
+    $('prev').onclick = function () {
+      if (idx > 0) { idx--; renderQuestion(); }
+    };
+    $('again').onclick = function () { show('intro'); };
+    $('save').onclick = function () {
+      var box = $('share');
+      box.hidden = false;
+      P.mountShare(box, renderCard, 'yinbo-habit-' + outcome.r.code);
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+  }
+
+  P.getJSON('../data/test.json').then(function (d) { data = d; init(); })
+    .catch(function () { $('load-error').hidden = false; });
+})();
+</script>
+</body>
+</html>

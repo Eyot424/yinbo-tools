@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>每日抽卡 · 隐波小玩法</title>
+<meta name="description" content="一天一张运势卡：手痒指数、宜、忌，外加一句毒鸡汤。娱乐，不是任何预测。">
+<meta property="og:title" content="每日抽卡">
+<meta property="og:description" content="一天一张运势卡：手痒指数、宜、忌，外加一句毒鸡汤。娱乐，不是任何预测。">
+<meta property="og:image" content="https://eyot424.github.io/yinbo-tools/play/assets/card-back.png">
+<meta name="theme-color" content="#FFF6DC">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a href="../">← 隐波小玩法</a><span class="muted">每日抽卡</span></div>
+  <noscript><p class="noscript">这个小玩法需要开启 JavaScript 才能玩。</p></noscript>
+  <p id="load-error" class="notice warn" hidden>卡组没能加载，请刷新页面再试。</p>
+
+  <header>
+    <p class="eyebrow">一天一张，宜忌只写行为</p>
+    <h1><span class="accent">每日抽卡</span></h1>
+  </header>
+
+  <section id="back-view">
+    <div class="deck-stage"><div class="cardback art"><img src="../assets/card-back.png" alt="卡背" width="480" height="640"></div></div>
+    <button type="button" class="btn btn-block" id="draw" disabled>今天的运势，抽！</button>
+    <p class="notice" id="seed-note" hidden></p>
+  </section>
+
+  <section id="card-view" hidden>
+    <article class="fortune" id="fortune">
+      <div class="art art-wide"><img id="c-art" alt="" width="640" height="480"></div>
+      <p class="date" id="c-date"></p>
+      <h2 id="c-name"></h2>
+      <div class="stars" id="c-itch"></div>
+      <div class="yi-ji">
+        <div class="yi"><b>宜</b><span id="c-do"></span></div>
+        <div class="ji"><b>忌</b><span id="c-dont"></span></div>
+      </div>
+      <div class="saying">
+        <p class="muted">今日老话</p>
+        <p id="c-saying"></p>
+        <p class="muted" style="margin-top:8px">实话一句</p>
+        <p id="c-verdict"></p>
+      </div>
+      <p class="soup" id="c-soup"></p>
+      <p class="card-foot">娱乐，不是任何预测；回测不代表未来 · 插画由 AI 生成 · 隐波的 AI 量化笔记</p>
+    </article>
+    <p class="notice">今天只能抽一次，明天再来。</p>
+    <p class="notice warn" id="seed-warn" hidden></p>
+    <div class="btn-row">
+      <button type="button" class="btn" id="save">保存去炫耀 / 去自黑</button>
+    </div>
+    <div id="share" hidden></div>
+  </section>
+
+  <section class="follow">
+    <h3>想看这些老话背后的回测</h3>
+    <div class="follow-row">
+      <p>X：<a href="https://x.com/yinbonotes" target="_blank" rel="noopener">关注 @yinbonotes</a></p>
+    </div>
+    <div class="follow-row">
+      <p>YouTube：<br><a href="https://www.youtube.com/@yinbonotes"><b>@yinbonotes</b></a></p>
+    </div>
+    <p class="disclaimer">娱乐，不是任何预测；回测不代表未来；插画由 AI 生成</p>
+  </section>
+</div>
+
+<script src="../assets/app.js"></script>
+<script>
+(function () {
+  'use strict';
+  var P = window.Play;
+  var $ = function (id) { return document.getElementById(id); };
+  var deck = null, card = null, dateStr = '', persisted = true;
+
+  function stars(n) {
+    var s = '';
+    for (var i = 0; i < 5; i++) { s += i < n ? '★' : '☆'; }
+    return s;
+  }
+
+  function lastDrawn() {
+    try { return window.localStorage.getItem('playLastDraw'); } catch (e) { return null; }
+  }
+  function markDrawn(d) {
+    try { window.localStorage.setItem('playLastDraw', d); } catch (e) { /* 无本地存储就算了 */ }
+  }
+
+  function draw() {
+    dateStr = P.todayStr();
+    var s = P.getSeed();
+    persisted = s.persisted;
+    var i = P.pickIndex(s.seed, dateStr, deck.length);
+    card = deck[i];
+    markDrawn(dateStr);
+
+    $('c-art').classList.remove('img-failed');
+    // 优先每张卡的专属插画（assets/cards/<id>.png），没有就退回通用场景图
+    $('c-art').onerror = function () { this.onerror = null; this.src = '../assets/scenes/' + card.scene + '.png'; };
+    $('c-art').src = '../assets/cards/' + card.id + '.png';
+    $('c-date').textContent = '今天的卡 · ' + dateStr;
+    $('c-name').textContent = card.name;
+    $('c-itch').innerHTML = '<small>手痒指数</small>' + stars(card.itch);
+    $('c-do').textContent = card['do'];
+    $('c-dont').textContent = card.dont;
+    $('c-saying').textContent = card.saying;
+    $('c-verdict').textContent = card.verdict;
+    $('c-soup').textContent = card.soup;
+
+    var warn = $('seed-warn');
+    if (persisted) {
+      warn.hidden = true;
+    } else {
+      warn.hidden = false;
+      warn.textContent = '你的浏览器没有开放本地存储，今天的卡没法固定，刷新会换一张。换个浏览器或关闭无痕模式再试。';
+    }
+    $('back-view').hidden = true;
+    $('card-view').hidden = false;
+    var f = $('fortune');
+    f.classList.remove('flip');
+    void f.offsetWidth;
+    f.classList.add('flip');
+    $('share').hidden = true;
+    $('share').innerHTML = '';
+    window.scrollTo(0, 0);
+  }
+
+  function renderCard(kind) {
+    var C = P.C, c = card;
+    return P.loadImage('../assets/cards/' + c.id + '.png').then(function (img) {
+      return img || P.loadImage('../assets/scenes/' + c.scene + '.png');  // loadImage 失败时返回 null，不是 reject
+    }).then(function (img) {
+      var W = 1080, H = kind === '34' ? 1440 : 1080;
+      var canvas = document.createElement('canvas');
+      canvas.width = W; canvas.height = H;
+      var ctx = canvas.getContext('2d');
+      P.drawBackdrop(ctx, W, H);
+      P.drawFit(ctx, '每日抽卡 · ' + dateStr, 80, 100, 920, 38, 26, 900, C.ink, 'left');
+      var itchLine = '手痒指数  ' + stars(c.itch);
+      if (kind === '34') {
+        P.drawArt(ctx, img, 80, 135, 920, 480, 36);
+        P.drawFit(ctx, c.name, 80, 725, 920, 88, 48, 900, C.ink, 'left');
+        P.drawFit(ctx, itchLine, 80, 790, 920, 38, 26, 900, C.redText, 'left');
+        var bx = [80, 550], bw = 450;
+        [['宜', c['do'], C.mint], ['忌', c.dont, '#FFA39B']].forEach(function (it, i) {
+          P.drawSticker(ctx, bx[i], 830, bw - 8, 142, 24, it[2]);
+          P.drawFit(ctx, it[0], bx[i] + 24, 878, 100, 32, 26, 900, C.ink, 'left');
+          P.drawParagraph(ctx, it[1], bx[i] + 24, 926, bw - 48, 42, 2, { size: 34, weight: 600 });
+        });
+        P.drawSticker(ctx, 80, 990, 912, 232, 24, C.paper);
+        P.drawFit(ctx, '今日老话', 108, 1028, 200, 26, 22, 400, C.dim, 'left');
+        P.drawParagraph(ctx, c.saying, 108, 1076, 864, 44, 1, { size: 36, weight: 700 });
+        P.drawFit(ctx, '实话一句', 108, 1124, 200, 26, 22, 400, C.dim, 'left');
+        P.drawParagraph(ctx, c.verdict.replace(/[。.]$/, ''), 108, 1162, 864, 36, 2, { size: 30 });
+        P.drawParagraph(ctx, c.soup, 80, 1272, 920, 46, 2, { size: 38, weight: 900, color: C.redText });
+      } else {
+        P.drawArt(ctx, img, 60, 130, 380, 380, 32);
+        P.drawFit(ctx, c.name, 480, 205, 540, 64, 40, 900, C.ink, 'left');
+        P.drawFit(ctx, itchLine, 480, 262, 540, 32, 24, 900, C.redText, 'left');
+        P.drawParagraph(ctx, '宜  ' + c['do'], 480, 340, 540, 40, 2, { size: 32, weight: 700, color: C.ink });
+        P.drawParagraph(ctx, '忌  ' + c.dont, 480, 440, 540, 40, 2, { size: 32, weight: 700, color: C.ink });
+        P.drawSticker(ctx, 60, 550, 952, 242, 24, C.paper);
+        P.drawFit(ctx, '今日老话', 88, 594, 200, 24, 20, 400, C.dim, 'left');
+        P.drawParagraph(ctx, c.saying, 88, 636, 904, 42, 1, { size: 34, weight: 700 });
+        P.drawFit(ctx, '实话一句', 88, 690, 200, 24, 20, 400, C.dim, 'left');
+        P.drawParagraph(ctx, c.verdict.replace(/[。.]$/, ''), 88, 730, 904, 38, 2, { size: 30 });
+        P.drawParagraph(ctx, c.soup, 60, 870, 960, 46, 2, { size: 38, weight: 900, color: C.redText });
+      }
+      P.drawFooter(ctx, W, H);
+      return canvas;
+    });
+  }
+
+  $('save').onclick = function () {
+    var box = $('share');
+    box.hidden = false;
+    P.mountShare(box, renderCard, 'yinbo-card-' + dateStr);
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  $('draw').onclick = draw;
+
+  P.getJSON('../data/deck.json').then(function (d) {
+    deck = d;
+    $('draw').disabled = false;
+    if (lastDrawn() === P.todayStr()) { $('draw').textContent = '再看一眼今天的卡（别想重抽）'; }
+    var probe = P.getSeed();
+    if (!probe.persisted) {
+      var n = $('seed-note');
+      n.hidden = false;
+      n.textContent = '你的浏览器没有开放本地存储：今天的卡没法固定，刷新会换一张。';
+    }
+  }).catch(function () { $('load-error').hidden = false; });
+})();
+</script>
+</body>
+</html>

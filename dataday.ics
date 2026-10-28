@@ -1,0 +1,1074 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//yinbonotes//dataday//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:美股数据日（隐波）
+X-WR-TIMEZONE:Asia/Singapore
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-10-28-FOMC@yinbonotes
+DTSTAMP:20261028T180000Z
+DTSTART:20261028T180000Z
+DTEND:20261028T183000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2026-10-29 02:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-05-NFP@yinbonotes
+DTSTAMP:20261106T133000Z
+DTSTART:20261106T133000Z
+DTEND:20261106T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2026-11-06 21:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-09-CPI@yinbonotes
+DTSTAMP:20261110T133000Z
+DTSTART:20261110T133000Z
+DTEND:20261110T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2026-11-10 21:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-16-RETAIL@yinbonotes
+DTSTAMP:20261117T133000Z
+DTSTART:20261117T133000Z
+DTEND:20261117T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2026-11-17 21:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview-2026.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-03-NFP@yinbonotes
+DTSTAMP:20261204T133000Z
+DTSTART:20261204T133000Z
+DTEND:20261204T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2026-12-04 21:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-09-FOMC@yinbonotes
+DTSTAMP:20261209T190000Z
+DTSTART:20261209T190000Z
+DTEND:20261209T193000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2026-12-10 03:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-09-CPI@yinbonotes
+DTSTAMP:20261210T133000Z
+DTSTART:20261210T133000Z
+DTEND:20261210T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2026-12-10 21:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-15-RETAIL@yinbonotes
+DTSTAMP:20261216T133000Z
+DTSTART:20261216T133000Z
+DTEND:20261216T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2026-12-16 21:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview-2026.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-07-NFP@yinbonotes
+DTSTAMP:20270108T133000Z
+DTSTART:20270108T133000Z
+DTEND:20270108T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-01-08 21:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-12-CPI@yinbonotes
+DTSTAMP:20270113T133000Z
+DTSTART:20270113T133000Z
+DTEND:20270113T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-01-13 21:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-14-RETAIL@yinbonotes
+DTSTAMP:20270115T133000Z
+DTSTART:20270115T133000Z
+DTEND:20270115T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-01-15 21:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-27-FOMC@yinbonotes
+DTSTAMP:20270127T190000Z
+DTSTART:20270127T190000Z
+DTEND:20270127T193000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2027-01-28 03:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-02-04-NFP@yinbonotes
+DTSTAMP:20270205T133000Z
+DTSTART:20270205T133000Z
+DTEND:20270205T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-02-05 21:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-02-10-CPI@yinbonotes
+DTSTAMP:20270211T133000Z
+DTSTART:20270211T133000Z
+DTEND:20270211T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-02-11 21:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-02-16-RETAIL@yinbonotes
+DTSTAMP:20270217T133000Z
+DTSTART:20270217T133000Z
+DTEND:20270217T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-02-17 21:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-04-NFP@yinbonotes
+DTSTAMP:20270305T133000Z
+DTSTART:20270305T133000Z
+DTEND:20270305T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-03-05 21:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-09-CPI@yinbonotes
+DTSTAMP:20270310T133000Z
+DTSTART:20270310T133000Z
+DTEND:20270310T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-03-10 21:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-16-RETAIL@yinbonotes
+DTSTAMP:20270316T123000Z
+DTSTART:20270316T123000Z
+DTEND:20270316T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-03-16 20:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-17-FOMC@yinbonotes
+DTSTAMP:20270317T180000Z
+DTSTART:20270317T180000Z
+DTEND:20270317T183000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2027-03-18 02:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-04-02-NFP@yinbonotes
+DTSTAMP:20270402T123000Z
+DTSTART:20270402T123000Z
+DTEND:20270402T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-04-02 20:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-04-13-CPI@yinbonotes
+DTSTAMP:20270413T123000Z
+DTSTART:20270413T123000Z
+DTEND:20270413T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-04-13 20:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-04-16-RETAIL@yinbonotes
+DTSTAMP:20270416T123000Z
+DTSTART:20270416T123000Z
+DTEND:20270416T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-04-16 20:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-04-28-FOMC@yinbonotes
+DTSTAMP:20270428T180000Z
+DTSTART:20270428T180000Z
+DTEND:20270428T183000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2027-04-29 02:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-05-07-NFP@yinbonotes
+DTSTAMP:20270507T123000Z
+DTSTART:20270507T123000Z
+DTEND:20270507T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-05-07 20:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-05-12-CPI@yinbonotes
+DTSTAMP:20270512T123000Z
+DTSTART:20270512T123000Z
+DTEND:20270512T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-05-12 20:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-05-14-RETAIL@yinbonotes
+DTSTAMP:20270514T123000Z
+DTSTART:20270514T123000Z
+DTEND:20270514T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-05-14 20:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-06-04-NFP@yinbonotes
+DTSTAMP:20270604T123000Z
+DTSTART:20270604T123000Z
+DTEND:20270604T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-06-04 20:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-06-09-FOMC@yinbonotes
+DTSTAMP:20270609T180000Z
+DTSTART:20270609T180000Z
+DTEND:20270609T183000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2027-06-10 02:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-06-10-CPI@yinbonotes
+DTSTAMP:20270610T123000Z
+DTSTART:20270610T123000Z
+DTEND:20270610T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-06-10 20:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-06-16-RETAIL@yinbonotes
+DTSTAMP:20270616T123000Z
+DTSTART:20270616T123000Z
+DTEND:20270616T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-06-16 20:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-02-NFP@yinbonotes
+DTSTAMP:20270702T123000Z
+DTSTART:20270702T123000Z
+DTEND:20270702T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-07-02 20:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-14-CPI@yinbonotes
+DTSTAMP:20270714T123000Z
+DTSTART:20270714T123000Z
+DTEND:20270714T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-07-14 20:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-16-RETAIL@yinbonotes
+DTSTAMP:20270716T123000Z
+DTSTART:20270716T123000Z
+DTEND:20270716T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-07-16 20:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-28-FOMC@yinbonotes
+DTSTAMP:20270728T180000Z
+DTSTART:20270728T180000Z
+DTEND:20270728T183000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2027-07-29 02:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-08-06-NFP@yinbonotes
+DTSTAMP:20270806T123000Z
+DTSTART:20270806T123000Z
+DTEND:20270806T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-08-06 20:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-08-11-CPI@yinbonotes
+DTSTAMP:20270811T123000Z
+DTSTART:20270811T123000Z
+DTEND:20270811T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-08-11 20:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-08-16-RETAIL@yinbonotes
+DTSTAMP:20270816T123000Z
+DTSTART:20270816T123000Z
+DTEND:20270816T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-08-16 20:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-09-03-NFP@yinbonotes
+DTSTAMP:20270903T123000Z
+DTSTART:20270903T123000Z
+DTEND:20270903T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-09-03 20:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-09-14-CPI@yinbonotes
+DTSTAMP:20270914T123000Z
+DTSTART:20270914T123000Z
+DTEND:20270914T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-09-14 20:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-09-15-FOMC@yinbonotes
+DTSTAMP:20270915T180000Z
+DTSTART:20270915T180000Z
+DTEND:20270915T183000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2027-09-16 02:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-09-16-RETAIL@yinbonotes
+DTSTAMP:20270916T123000Z
+DTSTART:20270916T123000Z
+DTEND:20270916T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-09-16 20:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-08-NFP@yinbonotes
+DTSTAMP:20271008T123000Z
+DTSTART:20271008T123000Z
+DTEND:20271008T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-10-08 20:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-14-CPI@yinbonotes
+DTSTAMP:20271014T123000Z
+DTSTART:20271014T123000Z
+DTEND:20271014T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-10-14 20:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-15-RETAIL@yinbonotes
+DTSTAMP:20271015T123000Z
+DTSTART:20271015T123000Z
+DTEND:20271015T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-10-15 20:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-27-FOMC@yinbonotes
+DTSTAMP:20271027T180000Z
+DTSTART:20271027T180000Z
+DTEND:20271027T183000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2027-10-28 02:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-05-NFP@yinbonotes
+DTSTAMP:20271105T123000Z
+DTSTART:20271105T123000Z
+DTEND:20271105T130000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-11-05 20:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-09-CPI@yinbonotes
+DTSTAMP:20271110T133000Z
+DTSTART:20271110T133000Z
+DTEND:20271110T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-11-10 21:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-15-RETAIL@yinbonotes
+DTSTAMP:20271116T133000Z
+DTSTART:20271116T133000Z
+DTEND:20271116T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-11-16 21:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-12-02-NFP@yinbonotes
+DTSTAMP:20271203T133000Z
+DTSTART:20271203T133000Z
+DTEND:20271203T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:非农就业报告公布
+DESCRIPTION:非农就业报告，新加坡时间 2027-12-03 21:30 公布。
+ \n样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.84%，普通日 0.66%\n
+ 上涨占比：57.95%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/empsit.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:非农就业报告公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-12-08-FOMC@yinbonotes
+DTSTAMP:20271208T190000Z
+DTSTART:20271208T190000Z
+DTEND:20271208T193000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:FOMC 利率决议
+DESCRIPTION:FOMC利率决议，新加坡时间 2027-12-09 03:00 公布。\n
+ 样本次数：117 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.77%，普通日 0.66%\n上
+ 涨占比：49.57%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.76R 降到 0.37R（回测不代表未来）。\n历史统计
+ 不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:FOMC 利率决议
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-12-09-CPI@yinbonotes
+DTSTAMP:20271210T133000Z
+DTSTART:20271210T133000Z
+DTEND:20271210T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:CPI 公布
+DESCRIPTION:CPI通胀数据，新加坡时间 2027-12-10 21:30 公布。\n
+ 样本次数：176 次（SPY，2012–2026 年；普通日对照 2501 日
+ ）\n当日涨跌幅（绝对值）均值：0.73%，普通日 0.66%\n上
+ 涨占比：59.66%，普通日 54.98%\n回测中事件前推迟入场，
+ 每笔从 0.21R 降到 −0.08R（回测不代表未来）。\n历史统
+ 计不代表未来，非建议。来自 隐波的 AI 量化笔记
+URL:https://www.bls.gov/schedule/news_release/cpi.htm
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:CPI 公布
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-12-14-RETAIL@yinbonotes
+DTSTAMP:20271215T133000Z
+DTSTART:20271215T133000Z
+DTEND:20271215T140000Z
+SEQUENCE:0
+TRANSP:TRANSPARENT
+SUMMARY:零售销售公布
+DESCRIPTION:零售销售数据，新加坡时间 2027-12-15 21:30 公布。
+ \n样本次数：178 次（SPY，2012–2026 年；普通日对照 2501 
+ 日）\n当日涨跌幅（绝对值）均值：0.68%，普通日 0.66%\n
+ 上涨占比：50.56%，普通日 54.98%\n历史统计不代表未来，
+ 非建议。来自 隐波的 AI 量化笔记
+URL:https://www.census.gov/economic-indicators/calendar-listview.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT60M
+DESCRIPTION:零售销售公布
+END:VALARM
+END:VEVENT
+END:VCALENDAR
