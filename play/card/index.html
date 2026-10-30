@@ -8,7 +8,7 @@
 <meta property="og:title" content="每日抽卡">
 <meta property="og:description" content="一天一张运势卡：手痒指数、宜、忌，外加一句毒鸡汤。娱乐，不是任何预测。">
 <meta property="og:image" content="https://eyot424.github.io/yinbo-tools/play/assets/card-back.png">
-<meta name="theme-color" content="#FFF6DC">
+<meta name="theme-color" content="#F5F6F8">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -45,7 +45,7 @@
         <p id="c-verdict"></p>
       </div>
       <p class="soup" id="c-soup"></p>
-      <p class="card-foot">娱乐，不是任何预测；回测不代表未来 · 插画由 AI 生成 · 隐波的 AI 量化笔记</p>
+      <p class="card-foot">娱乐，不是任何预测；回测不代表未来 · 隐波的 AI 量化笔记</p>
     </article>
     <p class="notice">今天只能抽一次，明天再来。</p>
     <p class="notice warn" id="seed-warn" hidden></p>
@@ -63,7 +63,7 @@
     <div class="follow-row">
       <p>YouTube：<br><a href="https://www.youtube.com/@yinbonotes"><b>@yinbonotes</b></a></p>
     </div>
-    <p class="disclaimer">娱乐，不是任何预测；回测不代表未来；插画由 AI 生成</p>
+    <p class="disclaimer">娱乐，不是任何预测；回测不代表未来</p>
   </section>
 </div>
 
@@ -144,7 +144,7 @@
         P.drawFit(ctx, c.name, 80, 725, 920, 88, 48, 900, C.ink, 'left');
         P.drawFit(ctx, itchLine, 80, 790, 920, 38, 26, 900, C.redText, 'left');
         var bx = [80, 550], bw = 450;
-        [['宜', c['do'], C.mint], ['忌', c.dont, '#FFA39B']].forEach(function (it, i) {
+        [['宜', c['do'], C.mint], ['忌', c.dont, '#F6D9D5']].forEach(function (it, i) {
           P.drawSticker(ctx, bx[i], 830, bw - 8, 142, 24, it[2]);
           P.drawFit(ctx, it[0], bx[i] + 24, 878, 100, 32, 26, 900, C.ink, 'left');
           P.drawParagraph(ctx, it[1], bx[i] + 24, 926, bw - 48, 42, 2, { size: 34, weight: 600 });

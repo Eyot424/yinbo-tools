@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>交易习惯图鉴 · 隐波小玩法</title>
-<meta name="description" content="12 道二选一情境题，看看你是八种交易习惯里的哪一种。娱乐，不是任何预测。">
+<meta name="description" content="12 道二选一情境题，看看你是 16 种交易人格里的哪一种。娱乐，不是任何预测。">
 <meta property="og:title" content="交易习惯图鉴">
-<meta property="og:description" content="12 道二选一情境题，看看你是八种交易习惯里的哪一种。娱乐，不是任何预测。">
+<meta property="og:description" content="12 道二选一情境题，看看你是 16 种交易人格里的哪一种。娱乐，不是任何预测。">
 <meta property="og:image" content="https://eyot424.github.io/yinbo-tools/play/assets/card-back.png">
-<meta name="theme-color" content="#FFF6DC">
+<meta name="theme-color" content="#F5F6F8">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -18,11 +18,11 @@
   <p id="load-error" class="notice warn" hidden>题库没能加载，请刷新页面再试。</p>
 
   <section id="intro" hidden>
-    <p class="eyebrow">八种韭菜，每种都有一集回测打脸</p>
+    <p class="eyebrow">16 种交易人格，每种都有一集回测打脸</p>
     <h1><span class="accent">交易习惯图鉴</span></h1>
     <p class="sub">12 道二选一，约 2 分钟。凭第一反应选，没有对错，只有真相。</p>
     <div class="panel">
-      <p style="margin:0">你的答案只留在这个页面里，不上传、不统计、不需要登录。测完会给你一个昵称、四枚字符芯片，和一集与你的习惯对口的回测。</p>
+      <p style="margin:0">你的答案只留在这个页面里，不上传、不统计、不需要登录。测完会给你一个昵称、四条维度倾向，和一集与你的习惯对口的回测。</p>
     </div>
     <button type="button" class="btn btn-block" id="start">开始测，看看我是哪种韭菜</button>
   </section>
@@ -35,21 +35,23 @@
   </section>
 
   <section id="result" hidden>
-    <p class="eyebrow">你的交易习惯是……</p>
-    <h1 class="result-name"><span class="accent" id="r-name"></span><span class="result-suffix" id="r-suffix"></span></h1>
-    <div class="chips" id="r-chips"></div>
-    <div class="art art-wide"><img id="r-art" alt="" width="640" height="480"></div>
-    <p class="tagline" id="r-tag"></p>
-    <p class="mod-line" id="r-mod"></p>
-
-    <div class="panel">
-      <h3>你大概率会……</h3>
-      <ul class="habits" id="r-habits"></ul>
+    <div class="rhero">
+      <p class="eyebrow">16 种交易人格之一</p>
+      <div class="rart"><img id="r-art" alt="" width="480" height="480"></div>
+      <div class="result-code" id="r-code"></div>
+      <h1 class="result-name"><span id="r-name"></span><span class="result-suffix" id="r-suffix"></span></h1>
+      <p class="tagline" id="r-tag"></p>
+      <p class="mod-line" id="r-mod"></p>
     </div>
 
     <div class="panel">
       <h3>四个维度的倾向</h3>
       <div class="bars" id="r-bars"></div>
+    </div>
+
+    <div class="panel">
+      <h3>你大概率会……</h3>
+      <ul class="habits" id="r-habits"></ul>
     </div>
 
     <div class="panel">
@@ -75,7 +77,7 @@
     <div class="follow-row">
       <p>YouTube：<br><a href="https://www.youtube.com/@yinbonotes"><b>@yinbonotes</b></a></p>
     </div>
-    <p class="disclaimer">娱乐，不是任何预测；回测不代表未来；插画由 AI 生成。不是心理测量，不构成投资建议。</p>
+    <p class="disclaimer">娱乐，不是任何预测；回测不代表未来。不是心理测量，不构成投资建议。</p>
   </section>
 </div>
 
@@ -135,7 +137,8 @@
     var side = function (id) { return counts[id] >= 2 ? 'a' : 'b'; };
     var code = dimById('d1')[side('d1')].key + dimById('d2')[side('d2')].key + '-' + dimById('d3')[side('d3')].key;
     var mod = side('d4') === 'a' ? 'watch' : 'zen';
-    return { counts: counts, code: code, mod: mod, side: side };
+    var code4 = code.replace('-', '').toUpperCase() + (mod === 'watch' ? 'W' : 'C');
+    return { counts: counts, code: code, code4: code4, mod: mod, side: side };
   }
 
   function strength(a) { return (a === 3 || a === 0) ? '明显' : '略偏'; }
@@ -175,27 +178,21 @@
     var type = data.types[r.code], mod = data.modifiers[r.mod];
     outcome = { r: r, type: type, mod: mod };
 
+    $('r-code').textContent = r.code4;
     $('r-name').textContent = type.nickname;
     $('r-suffix').textContent = mod.suffix.replace('·', '');
-    var chips = $('r-chips');
-    chips.innerHTML = '';
-    outcome.chipList = [];
-    data.dimensions.forEach(function (d) {
+    var theme = P.themeOf(r.code);
+    var res = $('result');
+    res.style.setProperty('--t', theme.t);
+    res.style.setProperty('--d', theme.d);
+    outcome.theme = theme;
+    outcome.dimInfo = data.dimensions.map(function (d) {
       var a = r.counts[d.id];
-      var end = a >= 2 ? d.a : d.b;
-      var label = end.label + ' · ' + strength(a);
-      outcome.chipList.push(label);
-      var c = document.createElement('span');
-      c.className = 'chip';
-      c.textContent = end.label + ' ';
-      var s = document.createElement('small');
-      s.textContent = strength(a);
-      c.appendChild(s);
-      chips.appendChild(c);
+      return { d: d, side: a >= 2 ? 'a' : 'b', strong: (a === 3 || a === 0) };
     });
     var img = $('r-art');
     img.classList.remove('img-failed');
-    img.src = '../assets/types/' + type.code + '.png';
+    img.src = '../assets/types/' + r.code4 + '.png';
     $('r-tag').textContent = type.tagline;
     $('r-mod').textContent = mod.name + '：' + mod.tagline;
 
@@ -209,19 +206,23 @@
 
     var bars = $('r-bars');
     bars.innerHTML = '';
-    var pos = { 3: 10, 2: 33, 1: 67, 0: 90 };
-    data.dimensions.forEach(function (d) {
-      var a = r.counts[d.id];
+    outcome.dimInfo.forEach(function (x) {
+      var d = x.d, tail = x.strong ? '明显' : '略偏';
       var row = document.createElement('div');
       row.className = 'bar-row';
-      row.innerHTML = '<div class="ends"><span><b></b> <span class="muted"></span></span><span><span class="muted"></span> <b></b></span></div>' +
-        '<div class="bar"><i></i></div><div class="how"></div>';
-      var bs = row.getElementsByTagName('b'), ms = row.querySelectorAll('.muted');
-      bs[0].textContent = d.a.label; ms[0].textContent = d.a.gloss;
-      ms[1].textContent = d.b.gloss; bs[1].textContent = d.b.label;
-      row.querySelector('.bar i').style.left = pos[a] + '%';
-      row.querySelector('.how').textContent = d.name + '：' + (a >= 2 ? d.a.label : d.b.label) + ' ' + strength(a) +
-        '（' + Math.max(a, 3 - a) + ' : ' + Math.min(a, 3 - a) + '）';
+      row.innerHTML = '<div class="dim"></div><div class="ends"><span></span><span></span></div>' +
+        '<div class="bar"><i></i></div>';
+      row.querySelector('.dim').textContent = d.name;
+      var sp = row.querySelectorAll('.ends > span');
+      function fill(el, label, on) {
+        el.textContent = label;
+        if (on) { el.className = 'on'; var sm = document.createElement('small'); sm.textContent = tail; el.appendChild(sm); }
+      }
+      fill(sp[0], d.a.label, x.side === 'a');
+      fill(sp[1], d.b.label, x.side === 'b');
+      var i = row.querySelector('.bar i');
+      i.className = x.side === 'a' ? 'l' : 'r';
+      i.style.width = (x.strong ? 80 : 60) + '%';
       bars.appendChild(row);
     });
 
@@ -238,40 +239,56 @@
   /* ---------- 分享卡 ---------- */
 
   function renderCard(kind) {
-    var o = outcome, t = o.type, m = o.mod, C = P.C;
-    var CHIPCOL = [C.mint, C.cyan, C.yellow, '#FFA39B'];
-    return P.loadImage('../assets/types/' + t.code + '.png').then(function (img) {
+    var o = outcome, t = o.type, m = o.mod, C = P.C, th = o.theme;
+    return P.loadImage('../assets/types/' + o.r.code4 + '.png').then(function (img) {
       var W = 1080, H = kind === '34' ? 1440 : 1080;
       var canvas = document.createElement('canvas');
       canvas.width = W; canvas.height = H;
       var ctx = canvas.getContext('2d');
       P.drawBackdrop(ctx, W, H);
-      P.drawFit(ctx, '交易习惯图鉴', 80, 100, 600, 40, 28, 900, C.ink, 'left');
-      var nick = t.nickname;
+      var suffix = m.suffix.replace('·', '');
+      function habitsFrom(x, y, w, size, lh) {
+        P.drawFit(ctx, '你大概率会……', x, y, w, 30, 22, 800, th.d, 'left');
+        y += 14;
+        t.habits.forEach(function (h, i) {
+          ctx.fillStyle = th.t;
+          ctx.beginPath(); ctx.arc(x + 15, y + lh * 0.5 + 6, 15, 0, 6.2832); ctx.fill();
+          P.drawFit(ctx, String(i + 1), x + 15, y + lh * 0.5 + 13, 20, 20, 14, 700, th.d, 'center');
+          P.drawFit(ctx, h, x + 44, y + lh * 0.5 + 12, w - 44, size, 18, 500, C.ink, 'left');
+          y += lh;
+        });
+        return y;
+      }
       if (kind === '34') {
-        P.drawArt(ctx, img, 80, 140, 920, 620, 36);
-        P.drawFit(ctx, nick, 80, 870, 920, 88, 48, 800, C.ink, 'left');
-        P.drawFit(ctx, m.suffix.replace('·', '') , 80, 925, 920, 40, 28, 900, C.redText, 'left');
-        var cw = 210, gap = 20;
-        o.chipList.forEach(function (label, i) {
-          P.drawChip(ctx, label, 80 + i * (cw + gap), 960, cw, 76, CHIPCOL[i]);
+        ctx.fillStyle = th.t; ctx.fillRect(0, 0, W, 450);
+        P.drawFit(ctx, '交易习惯图鉴 · 16 种交易人格之一', 60, 80, 960, 28, 20, 700, th.d, 'left');
+        P.drawFigure(ctx, img, 140, 100, 800, 350);
+        P.drawFit(ctx, o.r.code4, 60, 560, 600, 96, 70, 800, th.d, 'left');
+        var nsz = P.drawFit(ctx, t.nickname, 60, 632, 760, 54, 36, 800, C.ink, 'left');
+        P.setFont(ctx, nsz, 800);
+        var nw = ctx.measureText(t.nickname).width;
+        P.drawSticker(ctx, 60 + nw + 16, 592, 130, 44, 22, th.d);
+        P.drawFit(ctx, suffix, 60 + nw + 16 + 65, 623, 110, 26, 18, 700, '#fff', 'center');
+        P.drawParagraph(ctx, t.tagline, 60, 684, 960, 38, 2, { size: 29, weight: 500, color: '#3d3a48' });
+        var by = 790;
+        o.dimInfo.forEach(function (x) {
+          P.drawBar(ctx, 60, by, 960, x.d.name, x.d, x.side, x.strong, th, { name: 20, label: 30, bar: 12 });
+          by += 88;
         });
-        P.drawParagraph(ctx, t.tagline, 80, 1110, 920, 52, 2, { size: 40, weight: 600 });
-        P.drawSticker(ctx, 80, 1165, 912, 104, 24, '#FFF1A8');
-        P.drawFit(ctx, '回测打脸现场：这一集专治你', 108, 1209, 860, 28, 22, 800, C.redText, 'left');
-        P.drawParagraph(ctx, '第 ' + t.episode.no + ' 集 ' + t.episode.title, 108, 1255, 860, 40, 1, { size: 32, weight: 800 });
+        habitsFrom(60, 1182, 960, 28, 40);
       } else {
-        P.drawArt(ctx, img, 60, 130, 440, 440, 32);
-        P.drawFit(ctx, nick, 540, 215, 480, 64, 40, 900, C.ink, 'left');
-        P.drawFit(ctx, m.suffix.replace('·', ''), 540, 268, 480, 36, 26, 900, C.redText, 'left');
-        var cw2 = 230;
-        o.chipList.forEach(function (label, i) {
-          P.drawChip(ctx, label, 540 + (i % 2) * (cw2 + 20), 300 + Math.floor(i / 2) * 96, cw2, 76, CHIPCOL[i]);
+        ctx.fillStyle = th.t; ctx.fillRect(0, 0, 470, 520);
+        P.drawFigure(ctx, img, 20, 40, 430, 480);
+        P.drawFit(ctx, '交易习惯图鉴 · 16 种交易人格之一', 500, 76, 530, 24, 16, 700, th.d, 'left');
+        P.drawFit(ctx, o.r.code4, 500, 178, 530, 96, 60, 800, th.d, 'left');
+        P.drawFit(ctx, t.nickname, 500, 246, 530, 50, 30, 800, C.ink, 'left');
+        P.drawFit(ctx, suffix, 500, 292, 200, 26, 18, 700, th.d, 'left');
+        P.drawParagraph(ctx, t.tagline, 500, 350, 530, 38, 3, { size: 28, weight: 500, color: '#3d3a48' });
+        var ys = [560, 560, 668, 668], xs = [60, 560, 60, 560];
+        o.dimInfo.forEach(function (x, i) {
+          P.drawBar(ctx, xs[i], ys[i], 460, x.d.name, x.d, x.side, x.strong, th, { name: 18, label: 26, bar: 12 });
         });
-        var y = P.drawParagraph(ctx, t.tagline, 60, 650, 960, 54, 2, { size: 42, weight: 600 }) + 24;
-        t.habits.forEach(function (h) {
-          y = P.drawParagraph(ctx, h, 60, y, 960, 44, 2, { size: 32, color: C.ink }) + 14;
-        });
+        habitsFrom(60, 800, 960, 26, 44);
       }
       P.drawFooter(ctx, W, H);
       return canvas;
