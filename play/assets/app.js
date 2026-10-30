@@ -5,8 +5,11 @@
 
   var FONT = '-apple-system, "PingFang SC", "Noto Sans CJK SC", sans-serif';
   var WATERMARK = '隐波的 AI 量化笔记';
-  var FOOTER_LINE = '娱乐，不是任何预测；回测不代表未来 · 插画由 AI 生成';
-  var C = { cyan: '#4DB8FF', magenta: '#FF5A4D', text: '#1a1a1a', dim: '#5b5648', bg0: '#FFF6DC', bg1: '#FFE98A', yellow: '#FFD93B', mint: '#5FD9A4', paper: '#ffffff', ink: '#1a1a1a', redText: '#c2271b' };
+  var FOOTER_LINE = '娱乐，不是任何预测；回测不代表未来';
+  var C = { cyan: '#D3ECF2', magenta: '#F6D9D5', text: '#2c2a36', dim: '#6b6878', bg0: '#F5F6F8', bg1: '#E2E3E8', yellow: '#FBEFC8', mint: '#DDF0DA', paper: '#ffffff', ink: '#2c2a36', redText: '#6B3FC4', line: '#E2E3E8' };
+  // 16 型分 4 组 4 色：t 浅底、d 深色
+  var THEMES = { zn: { t: '#E6DDF8', d: '#6B3FC4' }, zs: { t: '#DDF0DA', d: '#3E9A4F' }, dn: { t: '#D3ECF2', d: '#2A8BA3' }, ds: { t: '#FBEFC8', d: '#C2901A' } };
+  function themeOf(code) { return THEMES[code.replace('-', '').slice(0, 2).toLowerCase()] || THEMES.zn; }
 
   /* ---------- 哈希、日期、种子 ---------- */
 
@@ -109,44 +112,29 @@
     ctx.font = (weight || 400) + ' ' + size + 'px ' + FONT;
   }
 
-  // 奶白底 + 圆点底纹 + 粗黑描边
+  // 浅灰白底
   function drawBackdrop(ctx, W, H) {
     ctx.fillStyle = C.bg0;
     ctx.fillRect(0, 0, W, H);
-    ctx.fillStyle = 'rgba(26,26,26,0.09)';
-    for (var yy = 20; yy < H; yy += 44) {
-      for (var xx = 20; xx < W; xx += 44) {
-        ctx.beginPath(); ctx.arc(xx, yy, 3, 0, 6.2832); ctx.fill();
-      }
-    }
-    ctx.fillStyle = C.yellow;
-    ctx.fillRect(0, 0, W, 8);
-    ctx.strokeStyle = C.ink;
-    ctx.lineWidth = 8;
-    rr(ctx, 24, 24, W - 48, H - 48, 36);
-    ctx.stroke();
   }
 
-  // 贴纸块：白/彩底 + 粗黑描边 + 硬阴影
+  // 白色圆角卡片 + 细边
   function drawSticker(ctx, x, y, w, h, r, fill) {
-    ctx.fillStyle = C.ink;
-    rr(ctx, x + 8, y + 8, w, h, r);
-    ctx.fill();
     ctx.fillStyle = fill || C.paper;
     rr(ctx, x, y, w, h, r);
     ctx.fill();
-    ctx.strokeStyle = C.ink;
-    ctx.lineWidth = 5;
+    ctx.strokeStyle = C.line;
+    ctx.lineWidth = 2;
     rr(ctx, x, y, w, h, r);
     ctx.stroke();
   }
 
-  // 插画铺满圆角框（cover 裁切）；没有图就画渐变底
-  function drawArt(ctx, img, x, y, w, h, radius) {
+  // 插画铺满圆角框（cover 裁切）；没有图就画底色。bg 可指定主题色
+  function drawArt(ctx, img, x, y, w, h, radius, bg) {
     ctx.save();
     rr(ctx, x, y, w, h, radius);
     ctx.clip();
-    ctx.fillStyle = '#FFE98A';
+    ctx.fillStyle = bg || '#E6DDF8';
     ctx.fillRect(x, y, w, h);
     if (img) {
       var s = Math.max(w / img.width, h / img.height);
@@ -154,10 +142,14 @@
       ctx.drawImage(img, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh);
     }
     ctx.restore();
-    ctx.strokeStyle = C.ink;
-    ctx.lineWidth = 6;
-    rr(ctx, x, y, w, h, radius);
-    ctx.stroke();
+  }
+
+  // 透明底人物：放在主题色块里，按框内完整显示（contain），底边对齐
+  function drawFigure(ctx, img, x, y, w, h) {
+    if (!img) { return; }
+    var s = Math.min(w / img.width, h / img.height);
+    var dw = img.width * s, dh = img.height * s;
+    ctx.drawImage(img, x + (w - dw) / 2, y + h - dh, dw, dh);
   }
 
   // 逐字断行（中文为主）
@@ -211,7 +203,45 @@
 
   function drawChip(ctx, text, x, y, w, h, color) {
     drawSticker(ctx, x, y, w - 6, h - 6, h / 2, color || C.mint);
-    drawFit(ctx, text, x + (w - 6) / 2, y + (h - 6) / 2 + 12, w - 36, 32, 22, 800, C.ink, 'center');
+    drawFit(ctx, text, x + (w - 6) / 2, y + (h - 6) / 2 + 12, w - 36, 32, 22, 700, C.ink, 'center');
+  }
+
+  // 维度条：上方维度名，两端标签，较强一侧着主题色并带"明显/略偏"，两色进度条（无数字）。
+  // side 为 'a' 或 'b'，frac 为较强一侧的长度比例（明显 0.8，略偏 0.6）。
+  function drawBar(ctx, x, y, w, dim, d, side, strong, theme, sizes) {
+    var z = sizes || {};
+    var nameSize = z.name || 22, labSize = z.label || 32, barH = z.bar || 14;
+    var frac = strong ? 0.8 : 0.6;
+    drawFit(ctx, dim.split('').join(' '), x + w / 2, y, w, nameSize, 14, 700, '#8b8896', 'center');
+    var ly = y + nameSize + labSize * 0.55;
+    var on = side === 'a' ? d.a.label : d.b.label;
+    var tail = strong ? '明显' : '略偏';
+    function lab(txt, xx, al, isOn) {
+      setFont(ctx, labSize, isOn ? 800 : 600);
+      ctx.fillStyle = isOn ? theme.d : '#9a97a5';
+      ctx.textAlign = al; ctx.textBaseline = 'alphabetic';
+      ctx.fillText(txt, xx, ly);
+      if (isOn) {
+        var tw = ctx.measureText(txt).width;
+        setFont(ctx, Math.round(labSize * 0.58), 600);
+        ctx.fillText(tail, al === 'left' ? xx + tw + 10 : xx - tw - 10, ly);
+      }
+    }
+    // 较强一侧的标签在右端时，"明显"写在标签左边，需要右对齐
+    if (side === 'a') {
+      lab(d.a.label, x, 'left', true);
+      setFont(ctx, labSize, 600); ctx.fillStyle = '#9a97a5'; ctx.textAlign = 'right'; ctx.fillText(d.b.label, x + w, ly);
+    } else {
+      lab(d.b.label, x + w, 'right', true);
+      setFont(ctx, labSize, 600); ctx.fillStyle = '#9a97a5'; ctx.textAlign = 'left'; ctx.fillText(d.a.label, x, ly);
+    }
+    var by = ly + 14;
+    ctx.fillStyle = C.line;
+    rr(ctx, x, by, w, barH, barH / 2); ctx.fill();
+    ctx.fillStyle = theme.d;
+    var fw = w * frac;
+    rr(ctx, side === 'a' ? x : x + w - fw, by, fw, barH, barH / 2); ctx.fill();
+    return by + barH;
   }
 
   // 底部：免责小字 + 账号名水印（卡上只有账号名，无网址、无二维码）
@@ -308,7 +338,7 @@
     C: C, FONT: FONT, WATERMARK: WATERMARK, FOOTER_LINE: FOOTER_LINE,
     fnv1a: fnv1a, todayStr: todayStr, getSeed: getSeed, pickIndex: pickIndex,
     getJSON: getJSON, loadImage: loadImage, installImgFallback: installImgFallback,
-    rr: rr, setFont: setFont, drawBackdrop: drawBackdrop, drawArt: drawArt,
+    rr: rr, setFont: setFont, drawBackdrop: drawBackdrop, drawArt: drawArt, drawFigure: drawFigure, drawBar: drawBar, themeOf: themeOf, THEMES: THEMES,
     wrapLines: wrapLines, drawParagraph: drawParagraph, drawFit: drawFit,
     drawChip: drawChip, drawSticker: drawSticker, drawFooter: drawFooter, mountShare: mountShare
   };
