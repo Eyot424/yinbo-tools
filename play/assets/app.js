@@ -8,7 +8,7 @@
   var FOOTER_LINE = '娱乐，不是任何预测；回测不代表未来';
   var C = { cyan: '#D3ECF2', magenta: '#F6D9D5', text: '#2c2a36', dim: '#6b6878', bg0: '#F5F6F8', bg1: '#E2E3E8', yellow: '#FBEFC8', mint: '#DDF0DA', paper: '#ffffff', ink: '#2c2a36', redText: '#6B3FC4', line: '#E2E3E8' };
   // 16 型分 4 组 4 色：t 浅底、d 深色
-  var THEMES = { zn: { t: '#E6DDF8', d: '#6B3FC4' }, zs: { t: '#DDF0DA', d: '#3E9A4F' }, dn: { t: '#D3ECF2', d: '#2A8BA3' }, ds: { t: '#FBEFC8', d: '#C2901A' } };
+  var THEMES = { zn: { t: '#E6DDF8', d: '#6B3FC4', name: '冲锋派', chips: '追高 · 拿住' }, zs: { t: '#DDF0DA', d: '#3E9A4F', name: '快枪派', chips: '追高 · 落袋' }, dn: { t: '#D3ECF2', d: '#2A8BA3', name: '守株派', chips: '等待 · 拿住' }, ds: { t: '#FBEFC8', d: '#C2901A', name: '算盘派', chips: '等待 · 落袋' } };
   function themeOf(code) { return THEMES[code.replace('-', '').slice(0, 2).toLowerCase()] || THEMES.zn; }
 
   /* ---------- 哈希、日期、种子 ---------- */

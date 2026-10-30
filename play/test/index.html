@@ -21,10 +21,17 @@
     <p class="eyebrow">16 种交易人格，每种都有一集回测打脸</p>
     <h1><span class="accent">交易习惯图鉴</span></h1>
     <p class="sub">12 道二选一，约 2 分钟。凭第一反应选，没有对错，只有真相。</p>
-    <div class="panel">
-      <p style="margin:0">你的答案只留在这个页面里，不上传、不统计、不需要登录。测完会给你一个昵称、四条维度倾向，和一集与你的习惯对口的回测。</p>
+    <div class="family" aria-hidden="true">
+      <div class="fam-row g-zn"><span class="fam-tag">冲锋派</span><img src="../assets/types/ZNGW.png" alt="" width="68" height="68"><img src="../assets/types/ZNGC.png" alt="" width="68" height="68"><img src="../assets/types/ZNFW.png" alt="" width="68" height="68"><img src="../assets/types/ZNFC.png" alt="" width="68" height="68"></div>
+      <div class="fam-row g-zs"><span class="fam-tag">快枪派</span><img src="../assets/types/ZSGW.png" alt="" width="68" height="68"><img src="../assets/types/ZSGC.png" alt="" width="68" height="68"><img src="../assets/types/ZSFW.png" alt="" width="68" height="68"><img src="../assets/types/ZSFC.png" alt="" width="68" height="68"></div>
+      <div class="fam-row g-dn"><span class="fam-tag">守株派</span><img src="../assets/types/DNGW.png" alt="" width="68" height="68"><img src="../assets/types/DNGC.png" alt="" width="68" height="68"><img src="../assets/types/DNFW.png" alt="" width="68" height="68"><img src="../assets/types/DNFC.png" alt="" width="68" height="68"></div>
+      <div class="fam-row g-ds"><span class="fam-tag">算盘派</span><img src="../assets/types/DSGW.png" alt="" width="68" height="68"><img src="../assets/types/DSGC.png" alt="" width="68" height="68"><img src="../assets/types/DSFW.png" alt="" width="68" height="68"><img src="../assets/types/DSFC.png" alt="" width="68" height="68"></div>
     </div>
     <button type="button" class="btn btn-block" id="start">开始测，看看我是哪种韭菜</button>
+    <p class="start-note">你的答案只留在这个页面里，不上传、不统计、不需要登录。</p>
+
+    <div id="dim-cards" hidden></div>
+    <button type="button" id="start2" hidden></button>
   </section>
 
   <section id="quiz" hidden>
@@ -37,6 +44,7 @@
   <section id="result" hidden>
     <div class="rhero">
       <p class="eyebrow">16 种交易人格之一</p>
+      <p class="grp" id="r-grp"></p>
       <div class="rart"><img id="r-art" alt="" width="480" height="480"></div>
       <div class="result-code" id="r-code"></div>
       <h1 class="result-name"><span id="r-name"></span><span class="result-suffix" id="r-suffix"></span></h1>
@@ -186,6 +194,7 @@
     res.style.setProperty('--t', theme.t);
     res.style.setProperty('--d', theme.d);
     outcome.theme = theme;
+    $('r-grp').textContent = '你属于「' + theme.name + '」· ' + theme.chips;
     outcome.dimInfo = data.dimensions.map(function (d) {
       var a = r.counts[d.id];
       return { d: d, side: a >= 2 ? 'a' : 'b', strong: (a === 3 || a === 0) };
@@ -297,11 +306,27 @@
 
   function init() {
     $('intro').hidden = false;
-    $('start').onclick = function () {
+    var begin = function () {
       answers = []; idx = 0;
       renderQuestion();
       show('quiz');
     };
+    $('start').onclick = begin;
+    $('start2').onclick = begin;
+    var dc = $('dim-cards');
+    var DIMCOL = ['#E6DDF8', '#DDF0DA', '#D3ECF2', '#FBEFC8'], DIMINK = ['#6B3FC4', '#3E9A4F', '#2A8BA3', '#C2901A'];
+    data.dimensions.forEach(function (d, i) {
+      var c = document.createElement('div');
+      c.className = 'dimcard';
+      c.style.background = DIMCOL[i];
+      c.style.setProperty('--d', DIMINK[i]);
+      c.innerHTML = '<b></b><div class="dm"><span></span><i>⟷</i><span></span></div><p></p>';
+      c.querySelector('b').textContent = d.name;
+      var sp = c.querySelectorAll('.dm span');
+      sp[0].textContent = d.a.label; sp[1].textContent = d.b.label;
+      c.querySelector('p').textContent = d.a.gloss + '，还是' + d.b.gloss;
+      dc.appendChild(c);
+    });
     $('prev').onclick = function () {
       if (idx > 0) { idx--; renderQuestion(); }
     };
