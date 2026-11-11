@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>回测猜猜看 · 隐波小玩法</title>
+<meta name="description" content="10 道题，每题一句流行说法，猜回测结果是什么。选完当场揭晓。娱乐，不是任何预测。">
+<meta property="og:title" content="回测猜猜看">
+<meta property="og:description" content="10 道题，每题一句流行说法，猜回测结果是什么。选完当场揭晓。娱乐，不是任何预测。">
+<meta property="og:image" content="https://eyot424.github.io/yinbo-tools/play/assets/card-back.png">
+<meta name="theme-color" content="#F5F6F8">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a href="../">← 隐波小玩法</a><span class="muted">回测猜猜看</span></div>
+  <noscript><p class="noscript">这个小测试需要开启 JavaScript 才能玩。</p></noscript>
+  <p id="load-error" class="notice warn" hidden>题目没能加载，请刷新页面再试。</p>
+
+  <section id="intro" hidden>
+    <p class="eyebrow" id="i-issue"></p>
+    <h1><span class="accent">回测猜猜看</span></h1>
+    <p class="sub" id="i-text"></p>
+    <p class="muted" id="i-gloss"></p>
+    <button type="button" class="btn btn-block" id="start">开始猜</button>
+    <p class="start-note">你的答案只留在这个页面里，不上传、不统计、不需要登录。</p>
+  </section>
+
+  <section id="quiz" hidden>
+    <div class="qmeta"><span id="qno"></span><span id="qscore"></span></div>
+    <div class="progress" aria-hidden="true"><i id="pbar"></i></div>
+    <p class="g-claim" id="claim"></p>
+    <p class="g-setup" id="setup"></p>
+    <p class="g-ask" id="ask"></p>
+    <div class="opts" id="opts"></div>
+    <div class="reveal" id="reveal" hidden>
+      <p class="verdict" id="verdict"></p>
+      <p class="big" id="number"></p>
+      <p id="line"></p>
+      <p><span class="tag" id="ep-no"></span> <a id="ep-link" target="_blank" rel="noopener">看这集 →</a></p>
+      <p class="small">回测，不代表未来</p>
+    </div>
+    <button type="button" class="btn btn-block" id="next" hidden></button>
+  </section>
+
+  <section id="result" hidden>
+    <div class="rhero">
+      <p class="eyebrow" id="r-issue"></p>
+      <p class="score"><span id="r-score"></span><small>/10</small></p>
+      <h1 class="result-name" id="r-title"></h1>
+      <p class="tagline" id="r-line"></p>
+    </div>
+    <div class="panel">
+      <h3>10 题对错</h3>
+      <ul class="rlist" id="r-list"></ul>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn" id="save">保存成绩卡</button>
+      <button type="button" class="btn btn-ghost" id="again">再来一次</button>
+    </div>
+    <div id="share" hidden></div>
+  </section>
+
+  <section class="follow">
+    <h3>想看这些题背后的回测</h3>
+    <div class="follow-row">
+      <p>X：<a href="https://x.com/yinbonotes" target="_blank" rel="noopener">关注 @yinbonotes</a></p>
+    </div>
+    <div class="follow-row">
+      <p>YouTube：<br><a href="https://www.youtube.com/@yinbonotes"><b>@yinbonotes</b></a></p>
+    </div>
+    <p class="disclaimer">娱乐，不是任何预测；回测不代表未来，不构成投资建议。</p>
+  </section>
+</div>
+
+<script src="../assets/app.js"></script>
+<script>
+(function () {
+  'use strict';
+  var P = window.Play;
+  var $ = function (id) { return document.getElementById(id); };
+  var data, picks = [], idx = 0, locked = false;
+
+  function show(which) {
+    ['intro', 'quiz', 'result'].forEach(function (s) { $(s).hidden = (s !== which); });
+    window.scrollTo(0, 0);
+  }
+
+  function score() {
+    var n = 0;
+    data.questions.forEach(function (q, i) { if (picks[i] === q.answer) { n++; } });
+    return n;
+  }
+
+  function renderQuestion() {
+    var q = data.questions[idx], n = data.questions.length;
+    locked = false;
+    $('qno').textContent = '第 ' + (idx + 1) + ' / ' + n + ' 题';
+    $('qscore').textContent = '';
+    $('pbar').style.width = (idx / n * 100) + '%';
+    $('claim').textContent = '“' + q.claim + '”';
+    $('setup').textContent = q.setup;
+    $('ask').textContent = q.ask;
+    $('reveal').hidden = true;
+    $('next').hidden = true;
+    var box = $('opts');
+    box.innerHTML = '';
+    q.options.forEach(function (text, k) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      var tag = document.createElement('b');
+      tag.textContent = 'ABC'.charAt(k);
+      var span = document.createElement('span');
+      span.textContent = text;
+      b.appendChild(tag);
+      b.appendChild(span);
+      b.onclick = function () { choose(k); };
+      box.appendChild(b);
+    });
+  }
+
+  function choose(k) {
+    if (locked) { return; }
+    locked = true;
+    var q = data.questions[idx], n = data.questions.length;
+    picks[idx] = k;
+    var btns = $('opts').children;
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].disabled = true;
+      if (i === q.answer) { btns[i].classList.add('right'); }
+      else if (i === k) { btns[i].classList.add('wrong'); }
+    }
+    var ok = (k === q.answer);
+    var v = $('verdict');
+    v.textContent = ok ? '猜对了' : '猜错了，答案是：' + q.options[q.answer];
+    v.className = 'verdict ' + (ok ? 'ok' : 'no');
+    $('number').textContent = q.number;
+    $('line').textContent = q.line;
+    $('ep-no').textContent = '第 ' + q.episode + ' 集';
+    $('ep-link').href = q.url;
+    $('reveal').hidden = false;
+    $('qscore').textContent = '已对 ' + score() + ' 题';
+    $('pbar').style.width = ((idx + 1) / n * 100) + '%';
+    var nx = $('next');
+    nx.textContent = idx < n - 1 ? '下一题' : '看成绩';
+    nx.hidden = false;
+    nx.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function tierOf(s) {
+    return data.tiers.filter(function (t) { return s >= t.min && s <= t.max; })[0];
+  }
+
+  function finish() {
+    var s = score(), t = tierOf(s);
+    $('r-issue').textContent = data.title;
+    $('r-score').textContent = s;
+    $('r-title').textContent = t.title;
+    $('r-line').textContent = t.line;
+    var ul = $('r-list');
+    ul.innerHTML = '';
+    data.questions.forEach(function (q, i) {
+      var ok = picks[i] === q.answer;
+      var li = document.createElement('li');
+      var m = document.createElement('span');
+      m.className = 'mark ' + (ok ? 'ok' : 'no');
+      m.textContent = ok ? '✓' : '✗';
+      var d = document.createElement('div');
+      d.appendChild(document.createTextNode((i + 1) + '. ' + q.claim + ' '));
+      var a = document.createElement('a');
+      a.href = q.url; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = '第 ' + q.episode + ' 集 →';
+      d.appendChild(a);
+      li.appendChild(m); li.appendChild(d);
+      ul.appendChild(li);
+    });
+    $('share').hidden = true;
+    $('share').innerHTML = '';
+    show('result');
+  }
+
+  /* ---------- 分享卡 ---------- */
+
+  function renderCard(kind) {
+    var C = P.C, th = P.THEMES.zn, s = score(), t = tierOf(s);
+    var wrong = -1;
+    data.questions.forEach(function (q, i) { if (wrong < 0 && picks[i] !== q.answer) { wrong = i; } });
+    var W = 1080, H = kind === '34' ? 1440 : 1080;
+    var canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    var ctx = canvas.getContext('2d');
+    P.drawBackdrop(ctx, W, H);
+    var topH = kind === '34' ? 640 : 470;
+    ctx.fillStyle = th.t; ctx.fillRect(0, 0, W, topH);
+    P.drawFit(ctx, '回测猜猜看 · ' + data.title.replace('回测猜猜看·', ''), 60, 90, 960, 34, 22, 700, th.d, 'left');
+    var big = kind === '34' ? 260 : 190;
+    var by = kind === '34' ? 340 : 270;
+    P.setFont(ctx, big, 800);
+    ctx.fillStyle = th.d; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    ctx.fillText(String(s), 60, by);
+    var sw = ctx.measureText(String(s)).width;
+    P.drawFit(ctx, '/10', 60 + sw + 12, by, 300, big * 0.36, 40, 800, C.dim, 'left');
+    P.drawFit(ctx, t.title, 60, by + (kind === '34' ? 110 : 90), 960, kind === '34' ? 84 : 70, 44, 800, C.ink, 'left');
+    P.drawParagraph(ctx, t.line, 60, by + (kind === '34' ? 170 : 140), 960, 40, 2, { size: 30, weight: 500, color: '#3d3a48' });
+    // 十题对错点
+    var dy = topH + (kind === '34' ? 80 : 60), r = 30, gap = (960 - 10 * 2 * r) / 9;
+    data.questions.forEach(function (q, i) {
+      var ok = picks[i] === q.answer, cx = 60 + r + i * (2 * r + gap);
+      ctx.fillStyle = ok ? '#2f8a52' : '#b3382c';
+      ctx.beginPath(); ctx.arc(cx, dy, r, 0, 6.2832); ctx.fill();
+      P.drawFit(ctx, ok ? '✓' : '✗', cx, dy + 11, 40, 30, 20, 700, '#fff', 'center');
+    });
+    var y = dy + (kind === '34' ? 120 : 100);
+    if (wrong >= 0) {
+      P.drawFit(ctx, '我猜错的一题：', 60, y, 960, 30, 22, 800, th.d, 'left');
+      P.drawParagraph(ctx, '“' + data.questions[wrong].claim + '”', 60, y + 56, 960, 52, 2, { size: 38, weight: 800, color: C.ink });
+      P.drawParagraph(ctx, data.questions[wrong].number, 60, y + (kind === '34' ? 190 : 176), 960, 40, 2, { size: 30, weight: 500, color: '#3d3a48' });
+    } else {
+      P.drawFit(ctx, '10 题全对，一条老话都没骗到我', 60, y + 20, 960, 40, 26, 800, C.ink, 'left');
+    }
+    P.drawFooter(ctx, W, H);
+    return Promise.resolve(canvas);
+  }
+
+  function init() {
+    $('i-issue').textContent = data.title;
+    $('i-text').textContent = data.intro;
+    $('i-gloss').textContent = data.glossary;
+    $('intro').hidden = false;
+    $('start').onclick = function () { picks = []; idx = 0; renderQuestion(); show('quiz'); };
+    $('next').onclick = function () {
+      if (idx < data.questions.length - 1) { idx++; renderQuestion(); window.scrollTo(0, 0); } else { finish(); }
+    };
+    $('again').onclick = function () { show('intro'); };
+    $('save').onclick = function () {
+      var box = $('share');
+      box.hidden = false;
+      P.mountShare(box, renderCard, 'yinbo-guess-' + data.issue);
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+  }
+
+  // ?issue=001 打开往期；缺省或不存在就用最新一期
+  P.getJSON('../data/guess/index.json').then(function (idxJson) {
+    var wanted = new URLSearchParams(location.search).get('issue');
+    var ids = idxJson.issues.map(function (x) { return x.id; });
+    var id = ids.indexOf(wanted) >= 0 ? wanted : idxJson.latest;
+    return P.getJSON('../data/guess/' + id + '.json');
+  }).then(function (d) { data = d; init(); })
+    .catch(function () { $('load-error').hidden = false; });
+})();
+</script>
+</body>
+</html>
